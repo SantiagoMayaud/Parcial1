@@ -5,22 +5,37 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de Maquetas</h1>
+<p>En Agosto de 2022, por razones varias, me volví a enganchar con el modelismo. Esta es una lista de todas las maquetas que conseguí desde entonces.</p>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar Nueva Maqueta</a>
 </p>
+<div class="row">
+    <form method="get" asp-action="Index" asp-controller="ModelKit">
+        <div>
+            <input class="form-control" asp-for="NameFilter"/>
+        </div>
+        <button class="btn" type="submit">Buscar</button>
+    </form>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.ModelKits[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pieces)
+                @Html.DisplayNameFor(model => model.ModelKits[0].Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Finished)
+                @Html.DisplayNameFor(model => model.ModelKits[0].ModelMaker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModelKits[0].Pieces)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModelKits[0].Finished)
             </th>
             <th></th>
         </tr>
@@ -32,15 +47,21 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelMaker)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Pieces)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Finished)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
             </td>
         </tr>
 }

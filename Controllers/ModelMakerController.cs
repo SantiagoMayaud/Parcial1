@@ -5,103 +5,95 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Parcial1SM.Data;
 using Parcial1SM.Models;
-using Parcial1SM.ViewModels;
+using Parcial1SM.data;
 
 namespace Parcial1SM.Controllers
 {
-    public class ModelKitController : Controller
+    public class ModelMakerController : Controller
     {
-        private readonly ModelKitContext _context;
+        private readonly ModelMakerContext _context;
 
-        public ModelKitController(ModelKitContext context)
+        public ModelMakerController(ModelMakerContext context)
         {
             _context = context;
         }
 
-        // GET: ModelKit
-        public async Task<IActionResult> Index(string nameFilter)
+        // GET: ModelMaker
+        public async Task<IActionResult> Index()
         {
-            var query = from ModelKit in _context.ModelKit select ModelKit;
-
-            if (!string.IsNullOrEmpty(nameFilter))
-            {
-                query = query.Where(x => x.Name.Contains(nameFilter));
-            }
-
-            var model = new ModelKitViewModel();
-            model.ModelKits = await query.ToListAsync();
-
-            return _context.ModelKit != null ?
-                        View(model) :
-                        Problem("Entity set 'MenuContext.Menu'  is null.");
+            var modelMakerContext = _context.ModelMaker.Include(m => m.ModelKits);
+            return View(await modelMakerContext.ToListAsync());
         }
 
-        // GET: ModelKit/Details/5
+        // GET: ModelMaker/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ModelKit == null)
+            if (id == null || _context.ModelMaker == null)
             {
                 return NotFound();
             }
 
-            var modelKit = await _context.ModelKit
+            var modelMaker = await _context.ModelMaker
+                .Include(m => m.ModelKits)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (modelKit == null)
+            if (modelMaker == null)
             {
                 return NotFound();
             }
 
-            return View(modelKit);
+            return View(modelMaker);
         }
 
-        // GET: ModelKit/Create
+        // GET: ModelMaker/Create
         public IActionResult Create()
         {
+            ViewData["ModelKitId"] = new SelectList(_context.Set<ModelKit>(), "Id", "Id");
             return View();
         }
 
-        // POST: ModelKit/Create
+        // POST: ModelMaker/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Pieces,Finished")] ModelKit modelKit)
+        public async Task<IActionResult> Create([Bind("Id,BrandName,ModelKitId")] ModelMaker modelMaker)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(modelKit);
+                _context.Add(modelMaker);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(modelKit);
+            ViewData["ModelKitId"] = new SelectList(_context.Set<ModelKit>(), "Id", "Id", modelMaker.ModelKits);
+            return View(modelMaker);
         }
 
-        // GET: ModelKit/Edit/5
+        // GET: ModelMaker/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ModelKit == null)
+            if (id == null || _context.ModelMaker == null)
             {
                 return NotFound();
             }
 
-            var modelKit = await _context.ModelKit.FindAsync(id);
-            if (modelKit == null)
+            var modelMaker = await _context.ModelMaker.FindAsync(id);
+            if (modelMaker == null)
             {
                 return NotFound();
             }
-            return View(modelKit);
+            ViewData["ModelKitId"] = new SelectList(_context.Set<ModelKit>(), "Id", "Id", modelMaker.ModelKits);
+            return View(modelMaker);
         }
 
-        // POST: ModelKit/Edit/5
+        // POST: ModelMaker/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Pieces,Finished")] ModelKit modelKit)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BrandName,ModelKitId")] ModelMaker modelMaker)
         {
-            if (id != modelKit.Id)
+            if (id != modelMaker.Id)
             {
                 return NotFound();
             }
@@ -110,12 +102,12 @@ namespace Parcial1SM.Controllers
             {
                 try
                 {
-                    _context.Update(modelKit);
+                    _context.Update(modelMaker);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ModelKitExists(modelKit.Id))
+                    if (!ModelMakerExists(modelMaker.Id))
                     {
                         return NotFound();
                     }
@@ -126,49 +118,51 @@ namespace Parcial1SM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(modelKit);
+            ViewData["ModelKitId"] = new SelectList(_context.Set<ModelKit>(), "Id", "Id", modelMaker.ModelKits);
+            return View(modelMaker);
         }
 
-        // GET: ModelKit/Delete/5
+        // GET: ModelMaker/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ModelKit == null)
+            if (id == null || _context.ModelMaker == null)
             {
                 return NotFound();
             }
 
-            var modelKit = await _context.ModelKit
+            var modelMaker = await _context.ModelMaker
+                .Include(m => m.ModelKits)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (modelKit == null)
+            if (modelMaker == null)
             {
                 return NotFound();
             }
 
-            return View(modelKit);
+            return View(modelMaker);
         }
 
-        // POST: ModelKit/Delete/5
+        // POST: ModelMaker/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ModelKit == null)
+            if (_context.ModelMaker == null)
             {
-                return Problem("Entity set 'ModelKitContext.ModelKit'  is null.");
+                return Problem("Entity set 'ModelMakerContext.ModelMaker'  is null.");
             }
-            var modelKit = await _context.ModelKit.FindAsync(id);
-            if (modelKit != null)
+            var modelMaker = await _context.ModelMaker.FindAsync(id);
+            if (modelMaker != null)
             {
-                _context.ModelKit.Remove(modelKit);
+                _context.ModelMaker.Remove(modelMaker);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ModelKitExists(int id)
+        private bool ModelMakerExists(int id)
         {
-            return (_context.ModelKit?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.ModelMaker?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

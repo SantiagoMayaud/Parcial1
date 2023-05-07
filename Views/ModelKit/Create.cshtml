@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Agregar Nueva Maqueta</h1>
 
-<h4>ModelKit</h4>
+<h4>Datos de la Maqueta:</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,6 +16,19 @@
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control">
+                    <option value="0">AvionMilitar</option>
+                    <option value="1">AvionComercial</option>
+                    <option value="2">Helicoptero</option>
+                    <option value="3">Tanque</option>
+                    <option value="4">Naval</option>
+                    <option value="5">Auto</option>
+                    <option value="6">Otros</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pieces" class="control-label"></label>

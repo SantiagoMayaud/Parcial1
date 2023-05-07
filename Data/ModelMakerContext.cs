@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Parcial1SM.Models;
 
-namespace Parcial1SM.Data
+namespace Parcial1SM.data
 {
-    public class ModelKitContext : DbContext
+    public class ModelMakerContext : DbContext
     {
-        public ModelKitContext (DbContextOptions<ModelKitContext> options)
+        public ModelMakerContext (DbContextOptions<ModelMakerContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Parcial1SM.Models.ModelKit> ModelKit { get; set; } = default!;
         public DbSet<Parcial1SM.Models.ModelMaker> ModelMaker { get; set; } = default!;
+        public DbSet<Parcial1SM.Models.ModelKit> ModelKit { get; set; } = default!;
+        
     }
 }
