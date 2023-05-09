@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Parcial1SM.Models;
 using Parcial1SM.Data;
+using Parcial1SM.Models;
+using Parcial1SM.ViewModels;
 
 namespace Parcial1SM.Controllers
 {
@@ -20,10 +21,23 @@ namespace Parcial1SM.Controllers
         }
 
         // GET: ModelMaker
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nameFilter)
         {
-            var modelMakerContext = _context.ModelMaker.Include(m => m.ModelKits);
-            return View(await modelMakerContext.ToListAsync());
+            var query = from ModelMaker in _context.ModelMaker select ModelMaker;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(x => x.BrandName.Contains(nameFilter.ToLower()));
+            }
+
+            var kits = query.Include(x=> x.ModelKits).Select(x=> x.ModelKits).ToList();
+
+            var model = new ModelMakerViewModel();
+            model.ModelMakers = await query.ToListAsync();
+
+            return _context.ModelMaker != null ?
+                        View(model) :
+                        Problem("Entity set 'MenuContext.Menu'  is null.");
         }
 
         // GET: ModelMaker/Details/5
@@ -52,8 +66,6 @@ namespace Parcial1SM.Controllers
         }
 
         // POST: ModelMaker/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,BrandName,ModelKitId,Country")] ModelMaker modelMaker)

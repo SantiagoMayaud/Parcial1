@@ -43,7 +43,7 @@ namespace Parcial1SM.Migrations
 
                     b.HasIndex("ModelMakerId");
 
-                    b.ToTable("ModelKit");
+                    b.ToTable("ModelKit", (string)null);
                 });
 
             modelBuilder.Entity("Parcial1SM.Models.ModelMaker", b =>
@@ -63,7 +63,7 @@ namespace Parcial1SM.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ModelMaker");
+                    b.ToTable("ModelMaker", (string)null);
                 });
 
             modelBuilder.Entity("Parcial1SM.Models.ModelKit", b =>

@@ -14,6 +14,6 @@ public class ModelKit{
     public bool Finished {get; set; } = true;
     public int ModelMakerId { get; set; }
     [Display(Name="Marca o Fabricante")]
-    public virtual ModelMaker ModelMaker {get; set; }
+    public virtual ModelMaker? ModelMaker {get; set; }
     
 }

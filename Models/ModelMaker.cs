@@ -8,7 +8,6 @@ public class ModelMaker{
     public string? BrandName {get; set;}
     [Display(Name = "Pais del Fabricante")]
     public string? Country {get; set; }
-    public int? ModelMakerId {get; set;}
     [Display(Name = "Maquetas")]
     public virtual List<ModelKit> ModelKits {get; set; } = new();
 }

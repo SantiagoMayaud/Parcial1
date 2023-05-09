@@ -27,7 +27,7 @@ namespace Parcial1SM.Controllers
 
             if (!string.IsNullOrEmpty(nameFilter))
             {
-                query = query.Where(x => x.Name.Contains(nameFilter));
+                query = query.Where(x => x.Name.Contains(nameFilter.ToLower()));
             }
 
             var model = new ModelKitViewModel();
@@ -63,12 +63,11 @@ namespace Parcial1SM.Controllers
         }
 
         // POST: ModelKit/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Type,ModelMaker,Pieces,Finished")] ModelKit modelKit)
+        public async Task<IActionResult> Create([Bind("Id,Name,Type,ModelMaker,Pieces,ModelMakerId,ModelMaker")] ModelKit modelKit)
         {
+            ModelState.Remove("ModelMaker");
             if (ModelState.IsValid)
             {
                 _context.Add(modelKit);
@@ -99,7 +98,7 @@ namespace Parcial1SM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,ModelMaker,Pieces,Finished")] ModelKit modelKit)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,ModelMaker,Pieces,ModelMakerId,ModelMaker")] ModelKit modelKit)
         {
             if (id != modelKit.Id)
             {

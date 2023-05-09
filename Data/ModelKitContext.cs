@@ -19,9 +19,9 @@ namespace Parcial1SM.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ModelKit>()
-            .HasOne(p => p.ModelMaker)
-            .WithMany(p => p.ModelKits)
+            modelBuilder.Entity<ModelMaker>()
+            .HasMany(p => p.ModelKits)
+            .WithOne(p => p.ModelMaker)
             .HasForeignKey (p=> p.ModelMakerId);
         }
     }
