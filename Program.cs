@@ -1,10 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Parcial1SM.Data;
-using Parcial1SM.data;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<ModelMakerContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("ModelMakerContext") ?? throw new InvalidOperationException("Connection string 'ModelMakerContext' not found.")));
 builder.Services.AddDbContext<ModelKitContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("ModelKitContext") ?? throw new InvalidOperationException("Connection string 'ModelKitContext' not found.")));
 

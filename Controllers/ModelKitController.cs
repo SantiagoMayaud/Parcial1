@@ -67,7 +67,7 @@ namespace Parcial1SM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Pieces,Finished")] ModelKit modelKit)
+        public async Task<IActionResult> Create([Bind("Id,Name,Type,ModelMaker,Pieces,Finished")] ModelKit modelKit)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Parcial1SM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Pieces,Finished")] ModelKit modelKit)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,ModelMaker,Pieces,Finished")] ModelKit modelKit)
         {
             if (id != modelKit.Id)
             {

@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Parcial1SM.Models;
-using Parcial1SM.data;
+using Parcial1SM.Data;
 
 namespace Parcial1SM.Controllers
 {
     public class ModelMakerController : Controller
     {
-        private readonly ModelMakerContext _context;
+        private readonly ModelKitContext _context;
 
-        public ModelMakerController(ModelMakerContext context)
+        public ModelMakerController(ModelKitContext context)
         {
             _context = context;
         }
@@ -48,7 +48,6 @@ namespace Parcial1SM.Controllers
         // GET: ModelMaker/Create
         public IActionResult Create()
         {
-            ViewData["ModelKitId"] = new SelectList(_context.Set<ModelKit>(), "Id", "Id");
             return View();
         }
 
@@ -57,7 +56,7 @@ namespace Parcial1SM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BrandName,ModelKitId")] ModelMaker modelMaker)
+        public async Task<IActionResult> Create([Bind("Id,BrandName,ModelKitId,Country")] ModelMaker modelMaker)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +90,7 @@ namespace Parcial1SM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BrandName,ModelKitId")] ModelMaker modelMaker)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BrandName,ModelKitId,Country")] ModelMaker modelMaker)
         {
             if (id != modelMaker.Id)
             {
@@ -155,14 +154,14 @@ namespace Parcial1SM.Controllers
             {
                 _context.ModelMaker.Remove(modelMaker);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ModelMakerExists(int id)
         {
-          return (_context.ModelMaker?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ModelMaker?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

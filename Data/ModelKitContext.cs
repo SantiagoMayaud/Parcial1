@@ -16,5 +16,13 @@ namespace Parcial1SM.Data
 
         public DbSet<Parcial1SM.Models.ModelKit> ModelKit { get; set; } = default!;
         public DbSet<Parcial1SM.Models.ModelMaker> ModelMaker { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ModelKit>()
+            .HasOne(p => p.ModelMaker)
+            .WithMany(p => p.ModelKits)
+            .HasForeignKey (p=> p.ModelMakerId);
+        }
     }
 }

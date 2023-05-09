@@ -6,6 +6,9 @@ public class ModelMaker{
     public int Id {get; set;}
     [Display(Name = "Fabricante del Modelo")]
     public string? BrandName {get; set;}
-    public int ModelMakerId {get; set;}
-    public virtual List<ModelKit> ModelKits {get; set; }
+    [Display(Name = "Pais del Fabricante")]
+    public string? Country {get; set; }
+    public int? ModelMakerId {get; set;}
+    [Display(Name = "Maquetas")]
+    public virtual List<ModelKit> ModelKits {get; set; } = new();
 }
