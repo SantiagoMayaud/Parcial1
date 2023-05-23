@@ -10085,11 +10085,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Parcial1SM\\Parcial1SM.csproj",
+      "projectUniqueName": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Herramientas de Programación\\Parcial1SM\\Parcial1SM.csproj",
       "projectName": "Parcial1SM",
-      "projectPath": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Parcial1SM\\Parcial1SM.csproj",
+      "projectPath": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Herramientas de Programación\\Parcial1SM\\Parcial1SM.csproj",
       "packagesPath": "C:\\Users\\Santiago\\.nuget\\packages\\",
-      "outputPath": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Parcial1SM\\obj\\",
+      "outputPath": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Herramientas de Programación\\Parcial1SM\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Santiago\\AppData\\Roaming\\NuGet\\NuGet.Config",

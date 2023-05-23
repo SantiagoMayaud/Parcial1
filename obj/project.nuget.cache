@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h8+a6m4p453rn2hAoYUaBbgZ8G1wTEvYYMtoeKq1fLizzpDhlD23YXGeAi37xA3LEQPhfe9BBCjaMgbpn8YUpQ==",
+  "dgSpecHash": "qhr8yEPJUuid6nqjR5rQPbyo8l3eYG9fZCKJjm6ekSwWgBgWedqGKFlJyupPDdSjbc0Mx5GJvC6e3/MkuxEGsw==",
   "success": true,
-  "projectFilePath": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Parcial1SM\\Parcial1SM.csproj",
+  "projectFilePath": "D:\\Santiago\\Trabajo\\ISTEA\\Proyectos y Trabajos\\Herramientas de Programación\\Parcial1SM\\Parcial1SM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Santiago\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Santiago\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.11\\microsoft.aspnetcore.razor.language.6.0.11.nupkg.sha512",

@@ -17,8 +17,7 @@ namespace Parcial1SM.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     BrandName = table.Column<string>(type: "TEXT", nullable: true),
-                    Country = table.Column<string>(type: "TEXT", nullable: true),
-                    ModelMakerId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Country = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

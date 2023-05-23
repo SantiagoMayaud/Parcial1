@@ -65,7 +65,7 @@ namespace Parcial1SM.Controllers
         // POST: ModelKit/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Type,ModelMaker,Pieces,ModelMakerId,ModelMaker")] ModelKit modelKit)
+        public async Task<IActionResult> Create([Bind("Id,Name,Type,ModelMaker,Pieces")] ModelKit modelKit)
         {
             ModelState.Remove("ModelMaker");
             if (ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace Parcial1SM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,ModelMaker,Pieces,ModelMakerId,ModelMaker")] ModelKit modelKit)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,ModelMaker,Pieces")] ModelKit modelKit)
         {
             if (id != modelKit.Id)
             {
